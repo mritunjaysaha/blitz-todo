@@ -8,7 +8,7 @@ import {
   useQueryErrorResetBoundary,
 } from "blitz"
 // import LoginForm from "app/auth/components/LoginForm"
-import "./style.css"
+import "./style.scss"
 
 export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
