@@ -1,5 +1,7 @@
 import { BlitzPage, useParam } from "blitz"
 import { Form } from "../../core/components/Form"
+import Layout from "../../core/layouts/Layout"
+
 const EditPage: BlitzPage = () => {
   const id = useParam("id")
 
@@ -11,5 +13,6 @@ const EditPage: BlitzPage = () => {
 }
 
 EditPage.suppressFirstRenderFlicker = true
+EditPage.getLayout = (page) => <Layout title="Edit Todo">{page}</Layout>
 
 export default EditPage
