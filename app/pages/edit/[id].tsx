@@ -1,13 +1,16 @@
-import { BlitzPage, useParam } from "blitz"
+import { BlitzPage, useParam, useRouterQuery } from "blitz"
 import { Form } from "../../core/components/Form"
 import Layout from "../../core/layouts/Layout"
 
 const EditPage: BlitzPage = () => {
   const id = useParam("id")
+  const query = useRouterQuery()
+
+  console.log(query)
 
   return (
     <div>
-      <Form url={`http://localhost:8000/api/todo/${id}`} method="PUT" />
+      <Form url={`http://localhost:8000/api/todo/${id}`} method="PUT" prevData={query} />
     </div>
   )
 }

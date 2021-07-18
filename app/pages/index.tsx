@@ -8,6 +8,7 @@ import Layout from "app/core/layouts/Layout"
 
 const Home: BlitzPage = () => {
   const [data, setData] = useState([])
+  const [filteredData, setFilteredData] = useState([])
 
   useEffect(() => {
     fetch("http://localhost:8000/api/todo")
@@ -16,18 +17,41 @@ const Home: BlitzPage = () => {
         setData(data)
         console.log({ data })
       })
-  }, [])
+  }, [filteredData])
+
+  async function handleDelete(e) {
+    try {
+      const res = await fetch(`http://localhost:8000/api/todo/${e.target.id}`, {
+        method: "DELETE",
+      })
+      const processedResponse = await res.json()
+
+      console.log({ processedResponse })
+      setFilteredData(data.filter(({ _id }) => processedResponse.data._id !== _id))
+      console.log({ data })
+    } catch (err) {
+      console.error(err.message)
+    }
+  }
+
   return (
     <div className="container">
       todo
+      <Link href="/add-todo">
+        <button>Add TODO</button>
+      </Link>
       <ul>
         {data.map(({ title, description, _id }) => (
           <li key={_id}>
             <h3>{title}</h3>
             <p>{description}</p>
             <div>
-              <button>Edit</button>
-              <button>Delete</button>
+              <Link href={{ pathname: `/edit/${_id}`, query: { title, description } }}>
+                <button>Edit</button>
+              </Link>
+              <button id={_id} onClick={handleDelete}>
+                Delete
+              </button>
             </div>
           </li>
         ))}

@@ -64,8 +64,8 @@ import { postData } from "../utils/form-methods"
  * @param {url, method} param0
  * @returns
  */
-export function Form({ url, method }) {
-  const [data, setData] = useState({ title: "post-test", description: "post-test" })
+export function Form({ url, method, prevData = { title: "", description: "" } }) {
+  const [data, setData] = useState(prevData)
   function handleChange(e) {
     setData((data) => ({ ...data, [e.target.id]: e.target.value }))
   }
@@ -88,7 +88,7 @@ export function Form({ url, method }) {
       <label htmlFor="description">Description</label>
       <input id="description" type="text" value={data.description} onChange={handleChange} />
       <div>
-        <button type="submit">Create</button>
+        <button type="submit">{method === "POST" ? "Create" : "Update"}</button>
       </div>
     </form>
   )
