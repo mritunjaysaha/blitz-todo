@@ -57,4 +57,18 @@
 // }
 
 // export default Form
-export {}
+export function Form({ url, method }) {
+  return (
+    <form>
+      <label htmlFor="title">Title</label>
+      <input id="title" type="text" />
+      <label htmlFor="description">Description</label>
+      <input id="description" type="text" />
+      <div>
+        <button type="submit">Create</button>
+      </div>
+    </form>
+  )
+}
+
+// export {}
